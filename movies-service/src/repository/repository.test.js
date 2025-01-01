@@ -31,4 +31,44 @@ test('getMoviePremieres', async () => {
     expect(movies[0].dataLancamento.getTime()).toBeGreaterThanOrEqual(monthAgo.getTime());
 })
 
+test('addMovie', async () => {
+    const movie = {
+        titulo: "Mission Impossible",
+        sinopse: "Ethan Hunt has a new mission, he needs to save the planet before a bomb explodes",
+        duracao: 181,
+        dataLancamento: new Date(),
+        imagem: "imagem.jpg",
+        categorias: [
+          "Ação"
+        ]
+    }
+
+    let result;
+
+    try{
+        result = await repository.addMovie(movie);
+        expect(result).toBeTruthy();
+    }finally{
+        await repository.deleteMovie(result._id)
+    }
+})
+
+test('deleteMovie', async () => {
+    const movie = {
+        titulo: "Mission Impossible",
+        sinopse: "Ethan Hunt has a new mission, he needs to save the planet before a bomb explodes",
+        duracao: 181,
+        dataLancamento: new Date(),
+        imagem: "imagem.jpg",
+        categorias: [
+          "Ação"
+        ]
+    }
+
+    const result = await repository.addMovie(movie);
+
+    const result2 = await repository.deleteMovie(result._id)
+    expect(result2).toBeTruthy();
+})
+
 

@@ -2,7 +2,7 @@ require('express-async-errors')
 const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
-const logger = require('../config/logger')
+
 let server = null;
 
 async function start(api, repository) {
@@ -10,7 +10,6 @@ async function start(api, repository) {
 
     app.use(helmet());
     app.use(morgan('dev'));
-    app.use(express.json())
 
     app.get('/health', (req, res, next) => {
         res.send(`The service ${process.env.MS_NAME} is running at ${process.env.PORT}`);
@@ -19,11 +18,9 @@ async function start(api, repository) {
     //Função de configuração que conecta nosso app ao repository que faz a comunicação com o banco, passando esses parametros permite que a API movies trabalhe com as rotas dando acesso ao servidor e ao banco
     api(app, repository);
 
-    //Middleware de tratamento de erro global, middleware padrão do express
-    //Logging para rastreamento de erros, registrar os dados em determinados momentos, lib winston é o logger mais famoso para nodejs
+    //Middleware de tratamento de erro, middleware padrão do express
     app.use((error, req, res, next) => {
-        //configurando o logger ja passando o grau de severidade
-        logger.error(`${error.stack}`);
+        logger.error(error.stack);
         res.sendStatus(500);
     })
 

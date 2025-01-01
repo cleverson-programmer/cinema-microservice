@@ -1,4 +1,4 @@
-const movies = [
+[
     {
         "_id": "675b4b97372666a406893bf9",
         "titulo": "Vingadores: Ultimato",
@@ -25,41 +25,3 @@ const movies = [
         ]
       }
 ]
-
-async function getAllMovies() {
-    return movies
-}
-
-async function getMovieById(id) {
-
-  if( id == -1 ) return null
-  
-  movies[0]._id = id
-  return movies[0]
-}
-
-async function getMoviePremieres() {
-    movies[0].dataLancamento = new Date()
-
-    return [movies[0]]
-}
-
-async function addMovie(movie){
-    return movies[0]
-
-}
-
-async function deleteMovie(id){
-  if(!id) throw new Error('Não foi possível excluir esse filme')
-  return true
-}
-
-
-module.exports = 
-{ 
-  getAllMovies,
-  getMovieById, 
-  getMoviePremieres, 
-  addMovie, 
-  deleteMovie 
-}

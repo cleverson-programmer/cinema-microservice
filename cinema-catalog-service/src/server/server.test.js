@@ -14,14 +14,14 @@ test('Server Start', async () => {
 })
 
 test('Health Check', async () => {
-    process.env.PORT = 3007;
+    process.env.PORT = 3005;
     const app = await server.start(apiMock);
     const response = await request(app).get('/health');
     expect(response.status).toEqual(200);
 })
 
 test('Error Check', async () => {
-    process.env.PORT = 3002;
+    process.env.PORT = 3006;
     const app = await server.start(apiMock);
     const response = await request(app).get('/error');
     expect(response.status).toEqual(500);

@@ -21,4 +21,22 @@ async function getMoviePremieres() {
     return db.collection('movies').find({ dataLancamento: { $gte: monthAgo } }).toArray();
 }
 
-module.exports = { getAllMovies, getMovieById, getMoviePremieres }
+async function addMovie(movie){
+    const db = await database.connect()
+    const result = await db.collection('movies')
+                .insertOne(movie)
+
+    movie._id = result.insertedId
+
+    return movie
+
+}
+
+async function deleteMovie(id){
+    const db = await database.connect()
+
+    return await db.collection('movies')
+                        .deleteOne({_id: new ObjectId(id)})
+}
+
+module.exports = { getAllMovies, getMovieById, getMoviePremieres, addMovie, deleteMovie }
