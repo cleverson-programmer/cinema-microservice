@@ -29,6 +29,12 @@ O sistema é composto por múltiplos microserviços, onde cada um desempenha uma
 - **Node.js**  
 - **Arquitetura MVC**  
 - **Microserviços**
+- **Json Web Token**
+- **B-crypt**
+- **Winston**
+- **Morgan**
+- **Helmet**
+- **dotenv**
 
 ## Próximos Passos
 
